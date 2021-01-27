@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/disciplinas', [ServiceController::class, 'service'])->name('get.disciplinas');
-Route::get('/index', [ServiceController::class, 'login'])->name('index');
+Route::get('/index', [ServiceController::class, 'index'])->name('index');

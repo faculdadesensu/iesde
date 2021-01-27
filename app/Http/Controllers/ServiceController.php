@@ -46,14 +46,14 @@ class ServiceController extends Controller
     public function cadastroMatricula($nome, $cpf, $email, $cep, $numero, $compl){
         $this->paramsReturn(array(
 
-            'CursoID' => $this->cursoID,
-            'PoloID' => $this->poloID,
-            'Nome' => $nome,
-            'CPF' => $cpf,
-            'Email' => $email,
-            'CEP' => $cep,
-            'Numero' => $numero,
-            'Compl' => $compl,
+            'CursoID'   => $this->cursoID,
+            'PoloID'    => $this->poloID,
+            'Nome'      => $nome,
+            'CPF'       => $cpf,
+            'Email'     => $email,
+            'CEP'       => $cep,
+            'Numero'    => $numero,
+            'Compl'     => $compl,
             
         ), 'cadastro');
     }
@@ -61,8 +61,8 @@ class ServiceController extends Controller
     public function alterarMatricula($value){
         $this->paramsReturn(array(
             
-            'MatriculaID' => $this->matricula,
-            'Situacao' => $value            
+            'MatriculaID'   => $this->matricula,
+            'Situacao'      => $value            
             
         ), 'situacao');
     }
@@ -70,13 +70,12 @@ class ServiceController extends Controller
     public function getNotas($disciplinaID){
         $this->paramsReturn(array(
             
-            'MatriculaID' => $this->matricula,
-            'CursoID' => $this->cursoID,
-            'DisciplinaID' => $disciplinaID           
+            'MatriculaID'   => $this->matricula,
+            'CursoID'       => $this->cursoID,
+            'DisciplinaID'  => $disciplinaID           
             
         ), 'notas');
     }
-
 
     public function getCourses(){
         $this->paramsReturn(array(), 'getCursos');
@@ -102,8 +101,10 @@ class ServiceController extends Controller
     }
 
     public function login(){
+
         $email = 'teste@teste';
         $senha = 'teste';
+
         return "<a href='http://apresentacao.portalava.com.br/loginAjax/?email='.$email.'?senha='.$senha.'>teste</a>";
     }
 
@@ -118,13 +119,13 @@ class ServiceController extends Controller
     public function cadastroProfessor($nome, $cpf, $email, $sexo, $orientadorTCC, $todosCursos, $situacao){
         $this->paramsReturn(array(
 
-            'Nome' => $nome,
-            'CPF' => $cpf,
-            'Sexo' => $sexo,
-            'Email' => $email,
+            'Nome'          => $nome,
+            'CPF'           => $cpf,
+            'Sexo'          => $sexo,
+            'Email'         => $email,
             'OrientadorTCC' => $orientadorTCC,
-            'TodosCursos' => $todosCursos,
-            'Situacao' => $situacao,
+            'TodosCursos'   => $todosCursos,
+            'Situacao'      => $situacao,
 
         ), 'cadastroProfessor');
     }
@@ -132,14 +133,14 @@ class ServiceController extends Controller
     public function alterarProfessor($professorID, $nome, $cpf, $email, $sexo, $orientadorTCC, $todosCursos, $situacao){
         $this->paramsReturn(array(
 
-            'ProfessorID' => $professorID,
-            'Nome' => $nome,
-            'CPF' => $cpf,
-            'Sexo' => $sexo,
-            'Email' => $email,
+            'ProfessorID'   => $professorID,
+            'Nome'          => $nome,
+            'CPF'           => $cpf,
+            'Sexo'          => $sexo,
+            'Email'         => $email,
             'OrientadorTCC' => $orientadorTCC,
-            'TodosCursos' => $todosCursos,
-            'Situacao' => $situacao,
+            'TodosCursos'   => $todosCursos,
+            'Situacao'      => $situacao,
 
         ), 'cadastroProfessor');
     }
@@ -176,9 +177,9 @@ class ServiceController extends Controller
         $this->paramsReturn(array(
 
             'ProcSeletivoID' => $procSeletivoID,
-            'CursoID' => $cursoID,
-            'PoloID' => $poloID,
-            'Situacao' => null,
+            'CursoID'   => $cursoID,
+            'PoloID'    => $poloID,
+            'Situacao'  => null,
 
         ), 'getInscritos');
     }
@@ -203,8 +204,8 @@ class ServiceController extends Controller
     public function getAulas($disciplinaID){
         $this->paramsReturn(array(
 
-            'MatriculaID' => $this->matricula,
-            'DisciplinaID' => $disciplinaID,
+            'MatriculaID'   => $this->matricula,
+            'DisciplinaID'  => $disciplinaID,
 
         ), 'getAulas');
     }
@@ -212,8 +213,8 @@ class ServiceController extends Controller
     public function getVideoAula($aulaID){
         $this->paramsReturn(array(
 
-            'MatriculaID' => $this->matricula,
-            'AulaID' => $aulaID,
+            'MatriculaID'   => $this->matricula,
+            'AulaID'        => $aulaID,
 
         ), 'getVideoAula');
     }
@@ -221,8 +222,8 @@ class ServiceController extends Controller
     public function getPdfsDisciplina($disciplinaID){
         $this->paramsReturn(array(
 
-            'MatriculaID' => $this->matricula,
-            'DisciplinaID' => $disciplinaID,
+            'MatriculaID'   => $this->matricula,
+            'DisciplinaID'  => $disciplinaID,
 
         ), 'getPdfsDisciplina');
     }
@@ -230,7 +231,7 @@ class ServiceController extends Controller
     public function getPdf($livroDisciplinaID){
         $this->paramsReturn(array(
 
-            'MatriculaID' => $this->matricula,
+            'MatriculaID'       => $this->matricula,
             'LivroDisciplinaID' => $livroDisciplinaID,
 
         ), 'getPdf');
@@ -239,8 +240,8 @@ class ServiceController extends Controller
     public function getAlunosAlterados($dataDE, $dataAte){
         $this->paramsReturn(array(
 
-            'dataDe' => $dataDE,
-            'dataAte' => $dataAte,
+            'dataDe'    => $dataDE,
+            'dataAte'   => $dataAte,
 
         ), 'getAlunosAlterados');
     }
@@ -302,6 +303,6 @@ class ServiceController extends Controller
     }
     
     public function index(){
-
+        return 'Estou na index';
     }
 }
