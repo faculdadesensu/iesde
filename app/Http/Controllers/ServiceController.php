@@ -115,15 +115,6 @@ class ServiceController extends Controller
         ), 'getDisciplinas');
     }
 
-    public function getAulas($disciplinaID){
-        $this->paramsReturn(array(
-
-            'MatriculaID' => $this->matricula,
-            'DisciplinaID' => $disciplinaID,
-
-        ), 'getAulas');
-    }
-
     public function cadastroProfessor($nome, $cpf, $email, $sexo, $orientadorTCC, $todosCursos, $situacao){
         $this->paramsReturn(array(
 
@@ -192,6 +183,32 @@ class ServiceController extends Controller
         ), 'getInscritos');
     }
 
+    public function getInfoPessoa(){
+        $this->paramsReturn(array(
+
+            'MatriculaID' => $this->matricula,
+
+        ), 'getInfoPessoa');
+    }
+
+    public function getNotaTCC(){
+        $this->paramsReturn(array(
+
+            'MatriculaID' => $this->matricula,
+
+        ), 'cadastro');
+    }
+
+    
+    public function getAulas($disciplinaID){
+        $this->paramsReturn(array(
+
+            'MatriculaID' => $this->matricula,
+            'DisciplinaID' => $disciplinaID,
+
+        ), 'getAulas');
+    }
+
     public function getVideoAula($aulaID){
         $this->paramsReturn(array(
 
@@ -217,6 +234,71 @@ class ServiceController extends Controller
             'LivroDisciplinaID' => $livroDisciplinaID,
 
         ), 'getPdf');
+    }
+
+    public function getAlunosAlterados($dataDE, $dataAte){
+        $this->paramsReturn(array(
+
+            'dataDe' => $dataDE,
+            'dataAte' => $dataAte,
+
+        ), 'getAlunosAlterados');
+    }
+
+    public function getDocumentosAluno(){
+        $this->paramsReturn(array(
+
+            'MatriculaID' => $this->matricula,
+
+        ), 'getDocumentosAluno');
+    }
+
+    public function getPoloAluno(){
+        $this->paramsReturn(array(
+
+            'MatriculaID' => $this->matricula,
+
+        ), 'getPoloAluno');
+    }
+
+    public function getContratoAluno(){
+        $this->paramsReturn(array(
+
+            'MatriculaID' => $this->matricula,
+
+        ), 'getContratoAluno');
+    }
+
+    public function getRequisicoesAluno(){
+        $this->paramsReturn(array(
+
+            'MatriculaID' => $this->matricula,
+
+        ), 'getRequisicoesAluno');
+    }
+
+    public function getProvasAluno(){
+        $this->paramsReturn(array(
+
+            'MatriculaID' => $this->matricula,
+
+        ), 'getRequisicoesAluno');
+    }
+
+    public function getAulasAssistidas(){
+        $this->paramsReturn(array(
+
+            'MatriculaID' => $this->matricula,
+
+        ), 'getRequisicoesAluno');
+    }
+    
+    public function getMaterialLidos(){
+        $this->paramsReturn(array(
+
+            'MatriculaID' => $this->matricula,
+
+        ), 'getMaterialLidos');
     }
     
     public function index(){
