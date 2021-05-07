@@ -19,4 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('/disciplinas', [ServiceController::class, 'service'])->name('get.disciplinas');
-Route::get('/index', [ServiceController::class, 'index'])->name('index');
+Route::get('/pdf/{idcurso}/{matricula}', [ServiceController::class, 'pdf'])->name('index');
+Route::get('/video/{idcurso}/{matricula}', [ServiceController::class, 'video'])->name('index');
+Route::get('/aulas/{idcurso}', [ServiceController::class, 'aulasVideo'])->name('index');

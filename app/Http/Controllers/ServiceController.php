@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ServiceController extends Controller
 {
@@ -10,7 +11,7 @@ class ServiceController extends Controller
     private $api_server = 'http://ead.portalava.com.br/web_service';
     private $api_http_user = '1590e99c63d124e374345de71205ddb7c63a0b8d';
     private $api_http_pass = 'afb94979f63f3038b84344d7ac37febe39748167';
-    private $chave_acesso = '7913463604cb98568ccfefe484f66f37';
+    private $chave_acesso = '1a3e879fb888613f313d5e0ee22bca7f';
     private $chave_name = 'EAD-API-KEY';
     private $format = 'json';
 
@@ -39,7 +40,11 @@ class ServiceController extends Controller
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
         $output = curl_exec($curl);
 
-        print_r($output); // Resposta do WebService
+        $response = json_decode($output);
+
+        //dd($response);
+        return $response; // Resposta do WebService
+
         
     }
 
@@ -78,14 +83,29 @@ class ServiceController extends Controller
     }
 
     public function getCourses(){
-        $this->paramsReturn(array(), 'getCursos');
+        $this->paramsReturn(array(
+
+            'DtInicio' => '01/01/2000',
+            'DtFim' => '01/01/2022',
+            'registros_pagina' => 10,
+            'pagina' => 1
+
+        ), 'getCursos');
     }
     public function getMatriculas(){
-        $this->paramsReturn(array(), 'getMatriculas');
+        $this->paramsReturn(array(
+            'registros_pagina' => 10,
+            'pagina' => 1
+        ), 'getMatriculas');
     }
     
     public function getGrades(){
-        $this->paramsReturn(array(), 'getGrades');
+        $this->paramsReturn(array(
+            'DtInicio' => '01/01/2000',
+            'DtFim' => '01/01/2022',
+            'registros_pagina' => 10,
+            'pagina' => 1
+        ), 'getGrades');
     }
 
     public function getBancoQuestoes(){
@@ -97,7 +117,10 @@ class ServiceController extends Controller
     }
 
     public function getDisciplinas(){
-        $this->paramsReturn(array(), 'getDisciplinas');
+        $this->paramsReturn(array(
+            'registros_pagina' => 10,
+            'pagina' => 1
+        ), 'getDisciplinas');
     }
 
     public function login(){
@@ -202,39 +225,48 @@ class ServiceController extends Controller
 
     
     public function getAulas($disciplinaID){
-        $this->paramsReturn(array(
+        $objeto = $this->paramsReturn(array(
 
             'MatriculaID'   => $this->matricula,
             'DisciplinaID'  => $disciplinaID,
 
         ), 'getAulas');
+
+        return $objeto;
     }
 
-    public function getVideoAula($aulaID){
-        $this->paramsReturn(array(
+    public function getVideoAula($aulaID, $matricula){
+        $objeto = $this->paramsReturn(array(
 
-            'MatriculaID'   => $this->matricula,
+            'MatriculaID'   => $matricula,
             'AulaID'        => $aulaID,
 
         ), 'getVideoAula');
+
+        return $objeto;
     }
 
-    public function getPdfsDisciplina($disciplinaID){
-        $this->paramsReturn(array(
+    public function getPdfsDisciplina($disciplinaID, $matricula){
+        $objeto =  $this->paramsReturn(array(
 
-            'MatriculaID'   => $this->matricula,
+            'MatriculaID'   => $matricula,
             'DisciplinaID'  => $disciplinaID,
+            'registros_pagina' => 10,
+            'pagina' => 1
 
         ), 'getPdfsDisciplina');
+        return  $objeto;
     }
 
-    public function getPdf($livroDisciplinaID){
-        $this->paramsReturn(array(
+    public function getPdf($livroDisciplinaID, $matricula){
+        $objeto = $this->paramsReturn(array(
 
-            'MatriculaID'       => $this->matricula,
+            'MatriculaID'       => $matricula,
             'LivroDisciplinaID' => $livroDisciplinaID,
 
         ), 'getPdf');
+
+        return $objeto;
     }
 
     public function getAlunosAlterados($dataDE, $dataAte){
@@ -302,7 +334,21 @@ class ServiceController extends Controller
         ), 'getMaterialLidos');
     }
     
-    public function index(){
-        return 'Estou na index';
+    public function pdf($idcurso, $matricula){
+
+        $livroDisciplinaID = $this->getPdfsDisciplina($idcurso, $matricula);
+        $listLinksPdf = $this->getPdf($livroDisciplinaID[0]->LivroDisciplinaID, $matricula);
+
+        return Redirect::to($listLinksPdf);
+    }
+
+    public function aulasVideo($idcurso){
+        $aulas = $this->getAulas($idcurso);
+        dd($aulas);
+    }
+
+    public function video($idaula, $matricula){
+        $video = $this->getVideoAula($idaula, $matricula);
+        return Redirect::to($video);
     }
 }
