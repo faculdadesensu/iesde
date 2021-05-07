@@ -344,7 +344,12 @@ class ServiceController extends Controller
 
     public function aulasVideo($idcurso, $matricula){
         $aulas = $this->getAulas($idcurso, $matricula);
-        dd($aulas);
+
+        foreach ($aulas as $value) {
+            echo "<span>Matricula: ".$value->MatriculaID."</span><br>";
+            echo "<span>Aula ID: ".$value->AulaID."</span><br>";
+            echo "<span>Titulo: ".$value->Tema."</span><br><br><hr>";
+        }
     }
 
     public function video($idaula, $matricula){
