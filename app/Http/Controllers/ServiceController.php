@@ -224,10 +224,10 @@ class ServiceController extends Controller
     }
 
     
-    public function getAulas($disciplinaID){
+    public function getAulas($disciplinaID, $matricula){
         $objeto = $this->paramsReturn(array(
 
-            'MatriculaID'   => $this->matricula,
+            'MatriculaID'   => $matricula,
             'DisciplinaID'  => $disciplinaID,
 
         ), 'getAulas');
@@ -342,8 +342,8 @@ class ServiceController extends Controller
         return Redirect::to($listLinksPdf);
     }
 
-    public function aulasVideo($idcurso){
-        $aulas = $this->getAulas($idcurso);
+    public function aulasVideo($idcurso, $matricula){
+        $aulas = $this->getAulas($idcurso, $matricula);
         dd($aulas);
     }
 
