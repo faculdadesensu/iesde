@@ -42,7 +42,6 @@ class ServiceController extends Controller
 
         $response = json_decode($output);
 
-        //dd($response);
         return $response; // Resposta do WebService
 
         
@@ -102,21 +101,68 @@ class ServiceController extends Controller
     }
     
     public function getGrades(){
-        $this->paramsReturn(array(
-            'DtInicio' => '01/01/2000',
+        $objeto = $this->paramsReturn(array(
+            'DtInicio' => '01/01/2018',
             'DtFim' => '01/01/2022',
             'registros_pagina' => 10,
             'pagina' => 1
         ), 'getGrades');
+
+        return $objeto;
     }
 
-    public function getBancoQuestoes(){
-        $this->paramsReturn(array(), 'getBancoQuestoes');
+    public function getBancoQuestoesDisciplinas($disciplinaID){
+        $objeto = $this->paramsReturn(array(
+            'DisciplinaID' => $disciplinaID,
+            'registros_pagina' => 10,
+            'pagina' => 1
+        ), 'getBancoQuestoesDisciplinas');
+
+        return $objeto;
+
     }
 
-    public function getAlternativas(){
-        $this->paramsReturn(array(), 'getAlternativas');
+    public function getAlternativas($disciplinaId){
+        $objeto = $this->paramsReturn(array(
+            'disciplinaID' => $disciplinaId,
+            'registros_pagina' => 10,
+            'pagina' => 1
+        ), 'getAlternativasDisciplina');
+
+        return $objeto;
     }
+
+    public function formattingAlternatives($disciplinaID){
+
+        $allQuestions = [] ;
+        $groupoAlternativas = [];
+
+        $questoes = $this->getBancoQuestoesDisciplinas($disciplinaID);
+        $alternativas = $this->getAlternativas($disciplinaID);
+
+        foreach ($alternativas as $value) {
+            $groupoAlternativas[$value->QuestaoID][] = $value;
+        }
+
+        foreach ($questoes as $questao) {
+            foreach ($groupoAlternativas as $alternativa) {
+                if ($questao->QuestaoID == $alternativa[0]->QuestaoID) {
+                   $allQuestions [] = ['questao' => $questao, 'alternativas' => $alternativa];
+                }
+            }
+        }
+
+        foreach ($allQuestions as $value) {
+            echo "<span><b>Disciplina ID: </b>".$value['questao']->DisciplinaID."</span><br>";
+            echo "<span><b>Formato Questao: </b>".$value['questao']->FormatoQuestao."</span><br><br>";
+            echo "<span><b>Enunciado: </b>".$value['questao']->Enunciado."</span><br>";
+            foreach ($value['alternativas'] as $alternativa) {
+                echo "<span><b>Alternativa: </b>".$alternativa->Texto."</span>";
+                echo "<span><b>Correta?: </b>".$alternativa->Correta."</span><br><br><br><br>";
+            }
+            echo "<span><b>Justificativa: </b>".$value['questao']->Justificativa."</span><br><br><hr>";
+        }
+    }  
 
     public function getDisciplinas(){
         $this->paramsReturn(array(
@@ -359,4 +405,6 @@ class ServiceController extends Controller
         $video = $this->getVideoAula($idaula, $matricula);
         return Redirect::to($video);
     }
+
+     
 }
