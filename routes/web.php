@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/disciplinas', [ServiceController::class, 'service'])->name('get.disciplinas');
+Route::get('/matriculas', [ServiceController::class, 'getMatriculas'])->name('get.disciplinas');
 Route::get('/pdf/{idcurso}/{matricula}', [ServiceController::class, 'pdf'])->name('index');
 Route::get('/video/{idcurso}/{matricula}', [ServiceController::class, 'video'])->name('index');
 Route::get('/aulas/{idcurso}/{matricula}', [ServiceController::class, 'aulasVideo'])->name('index');

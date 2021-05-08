@@ -93,10 +93,12 @@ class ServiceController extends Controller
         ), 'getCursos');
     }
     public function getMatriculas(){
-        $this->paramsReturn(array(
+        $objeto = $this->paramsReturn(array(
             'registros_pagina' => 10,
             'pagina' => 1
         ), 'getMatriculas');
+
+        return $objeto;
     }
     
     public function getGrades(){
@@ -348,7 +350,8 @@ class ServiceController extends Controller
         foreach ($aulas as $value) {
             echo "<span>Matricula: ".$value->MatriculaID."</span><br>";
             echo "<span>Aula ID: ".$value->AulaID."</span><br>";
-            echo "<span>Titulo: ".$value->Tema."</span><br><br><hr>";
+            echo "<span>Titulo: ".$value->Tema."</span><br><br>";
+            echo "<span>URL Video: https://avamoca.com.br/iesde/public/video/".$value->AulaID."/".$value->MatriculaID."</span><br><br><hr>";
         }
     }
 
