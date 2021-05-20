@@ -11,7 +11,13 @@ class ServiceController extends Controller
     private $api_server = 'http://ead.portalava.com.br/web_service';
     private $api_http_user = '1590e99c63d124e374345de71205ddb7c63a0b8d';
     private $api_http_pass = 'afb94979f63f3038b84344d7ac37febe39748167';
-    private $chave_acesso = '1a3e879fb888613f313d5e0ee22bca7f';
+
+    //CHAVE AVA SIGMA
+    private $chave_acesso = '6eef8c3c11a667b3f65468b18e1b516f';
+
+    //CHAVE AVA MOCA
+    //private $chave_acesso = '1a3e879fb888613f313d5e0ee22bca7f';
+    
     private $chave_name = 'EAD-API-KEY';
     private $format = 'json';
 
@@ -82,7 +88,7 @@ class ServiceController extends Controller
     }
 
     public function getCourses(){
-        $this->paramsReturn(array(
+        $objeto = $this->paramsReturn(array(
 
             'DtInicio' => '01/01/2000',
             'DtFim' => '01/01/2022',
@@ -90,18 +96,22 @@ class ServiceController extends Controller
             'pagina' => 1
 
         ), 'getCursos');
+
+        return $objeto;
     }
+    
     public function getMatriculas(){
         $objeto = $this->paramsReturn(array(
             'registros_pagina' => 10,
             'pagina' => 1
         ), 'getMatriculas');
 
-        return $objeto;
+       return view('welcome', ['matriculas' => $objeto]);
     }
     
-    public function getGrades(){
+    public function getGrades($cursoID){
         $objeto = $this->paramsReturn(array(
+            'CursoID' => $cursoID,
             'DtInicio' => '01/01/2018',
             'DtFim' => '01/01/2022',
             'registros_pagina' => 10,
@@ -152,23 +162,26 @@ class ServiceController extends Controller
             }
         }
 
-        foreach ($allQuestions as $value) {
-            echo "<span><b>Disciplina ID: </b>".$value['questao']->DisciplinaID."</span><br>";
-            echo "<span><b>Formato Questao: </b>".$value['questao']->FormatoQuestao."</span><br><br>";
-            echo "<span><b>Enunciado: </b>".$value['questao']->Enunciado."</span><br>";
-            foreach ($value['alternativas'] as $alternativa) {
-                echo "<span><b>Alternativa: </b>".$alternativa->Texto."</span>";
-                echo "<span><b>Correta?: </b>".$alternativa->Correta."</span><br><br><br><br>";
-            }
-            echo "<span><b>Justificativa: </b>".$value['questao']->Justificativa."</span><br><br><hr>";
-        }
+        return view('bancoQuestoes', ['allQuestions' => $allQuestions]);
     }  
 
-    public function getDisciplinas(){
-        $this->paramsReturn(array(
+    public function getDisciplinas($gradeID){
+        $objeto = $this->paramsReturn(array(
+            'GradeID' => $gradeID,
             'registros_pagina' => 10,
             'pagina' => 1
         ), 'getDisciplinas');
+
+        return $objeto;
+    }
+
+    public function getAllDisciplinas(){
+        $objeto = $this->paramsReturn(array(
+            'registros_pagina' => 10,
+            'pagina' => 1
+        ), 'getDisciplinas');
+
+        return $objeto;
     }
 
     public function login(){
@@ -382,9 +395,10 @@ class ServiceController extends Controller
         ), 'getMaterialLidos');
     }
     
-    public function pdf($idcurso, $matricula){
+    public function pdf($disciplinaID, $matricula){
 
-        $livroDisciplinaID = $this->getPdfsDisciplina($idcurso, $matricula);
+        $livroDisciplinaID = $this->getPdfsDisciplina($disciplinaID, $matricula);
+        
         $listLinksPdf = $this->getPdf($livroDisciplinaID[0]->LivroDisciplinaID, $matricula);
 
         return Redirect::to($listLinksPdf);
@@ -393,12 +407,7 @@ class ServiceController extends Controller
     public function aulasVideo($idcurso, $matricula){
         $aulas = $this->getAulas($idcurso, $matricula);
 
-        foreach ($aulas as $value) {
-            echo "<span>Matricula: ".$value->MatriculaID."</span><br>";
-            echo "<span>Aula ID: ".$value->AulaID."</span><br>";
-            echo "<span>Titulo: ".$value->Tema."</span><br><br>";
-            echo "<span>URL Video: https://avamoca.com.br/iesde/public/video/".$value->AulaID."/".$value->MatriculaID."</span><br><br><hr>";
-        }
+        return $aulas;
     }
 
     public function video($idaula, $matricula){
@@ -406,5 +415,21 @@ class ServiceController extends Controller
         return Redirect::to($video);
     }
 
-     
+    public function pdfLinks(Request $request){
+
+        $disciplinas = $this->getAllDisciplinas();
+
+        foreach ($disciplinas as $value) {
+            if ($value->DisciplinaID == $request->disciplinaID) {
+                $disciplinas = [$value];  
+            }
+        }
+
+        foreach ($disciplinas as $disciplina) {
+            $getAulas [] = $this->getAulas($disciplina->DisciplinaID, $request->matriculaID);
+        }
+
+        return view('welcome', ['disciplinas' => $disciplinas, 'matriculaID' => $request->matriculaID, 'aulas' => $getAulas]);
+
+    }
 }
