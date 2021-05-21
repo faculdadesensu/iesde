@@ -18,9 +18,14 @@
     </head>
     <body class="antialiased">
         <div class="conteiner" style="margin: 30px">
-        <form action="{{route('matriculas')}}" method="get">
-            <button class="btn btn-primary btn-sm" style="margin-bottom: 30px">MATRÍCULAS</button>
-        </form>
+            <div class="position-relative">
+                <h1 class="fw-bold text-center bg-primary p-2 text-white">NoAVA</h1>
+            </div>
+            <div>
+                <form action="{{route('matriculas')}}" method="get">
+                    <button class="btn btn-primary btn-sm" style="margin-bottom: 10px; margin-top: 30px">MATRÍCULAS</button>
+                </form>
+            </div>
         @if (@$matriculas)
             <div class="table-responsive">
                 <table class="table table-bordered table-sm" width="100%" cellspacing="0">
@@ -80,7 +85,7 @@
                 @if (@$disciplinas)
                     <h4>Resumo de Disciplinas</h4>
                     @foreach($disciplinas as $disciplina)
-                        <h6>URL de PDF: <a href="https://avamoca.com.br/iesde/public/pdf/{{$disciplina->DisciplinaID}}/{{$matriculaID}}" target="_blank">https://avamoca.com.br/iesde/public/pdf/{{$disciplina->DisciplinaID}}/{{$matriculaID}}</a></h6><hr>
+                        <h6>URL de PDF: <a href="https://sigma.noava.com.br/iesde/public/pdf/{{$disciplina->DisciplinaID}}/{{$matriculaID}}" target="_blank">https://sigma.noava.com.br/iesde/public/pdf/{{$disciplina->DisciplinaID}}/{{$matriculaID}}</a></h6><hr>
                         <h6>Disciplina ID: {{$disciplina->DisciplinaID}}</h6>
                         <h6>Curso ID: {{$disciplina->CursoID}}</h6>
                         <h6>Nome Disciplina: {{$disciplina->computed}}</h6><hr>
@@ -92,7 +97,7 @@
                                 @if (isset($value->DisciplinaID))
                                     @if($value->DisciplinaID == $disciplina->DisciplinaID)
                                         <p><b>Nome Aula: </b>{{$value->Tema}}</p>
-                                        <h6>URL do video: <a href="https://avamoca.com.br/iesde/public/video/{{$value->AulaID}}/{{$value->MatriculaID}}" target="_blank">https://avamoca.com.br/iesde/public/video/{{$value->AulaID}}/{{$value->MatriculaID}}</a></h6>
+                                        <h6>URL do video: <a href="https://sigma.noava.com.br/iesde/public/video/{{$value->AulaID}}/{{$value->MatriculaID}}" target="_blank">https://sigma.noava.com.br/iesde/public/video/{{$value->AulaID}}/{{$value->MatriculaID}}</a></h6>
                                         <a href="{{route( 'formattingAlternatives' , $value->DisciplinaID)}}"><button class="btn btn-primary btn-sm" style="margin-bottom: 30px;">Banco de Questões</button></a>
                                     @endif                      
                                 @endif
