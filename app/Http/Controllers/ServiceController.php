@@ -13,10 +13,10 @@ class ServiceController extends Controller
     private $api_http_pass = 'afb94979f63f3038b84344d7ac37febe39748167';
 
     //CHAVE AVA SIGMA
-    //private $chave_acesso = '6eef8c3c11a667b3f65468b18e1b516f';
+    private $chave_acesso = '6eef8c3c11a667b3f65468b18e1b516f';
 
     //CHAVE AVA MOCA
-    private $chave_acesso = '1a3e879fb888613f313d5e0ee22bca7f';
+    //private $chave_acesso = '1a3e879fb888613f313d5e0ee22bca7f';
     
     private $chave_name = 'EAD-API-KEY';
     private $format = 'json';
