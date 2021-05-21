@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>NoAVA</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -31,6 +31,7 @@
                 <span>B. {!!str_replace("<br>", "", $value['alternativas'][1]->Texto)!!}</span><br>
                 <span>C. {!!str_replace("<br>", "", $value['alternativas'][2]->Texto)!!}</span><br>
                 <span>D. {!!str_replace("<br>", "", $value['alternativas'][3]->Texto)!!}</span><br>
+                <span>E. {!!str_replace("<br>", "", $value['alternativas'][4]->Texto)!!}</span><br>
                 @foreach ($value['alternativas'] as $correta)
                     @if ($correta->Correta == "S")
                         @if ($correta->Texto == $value['alternativas'][0]->Texto)
@@ -44,6 +45,9 @@
                         @endif                 
                         @if ($correta->Texto == $value['alternativas'][3]->Texto)
                         ANSWER: D
+                        @endif                 
+                        @if ($correta->Texto == $value['alternativas'][4]->Texto)
+                        ANSWER: E
                         @endif                 
                     @endif
                 @endforeach
