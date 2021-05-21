@@ -85,7 +85,7 @@
                 @if (@$disciplinas)
                     <h4>Resumo de Disciplinas</h4>
                     @foreach($disciplinas as $disciplina)
-                        <h6>URL de PDF: <a href="https://sigma.noava.com.br/iesde/public/pdf/{{$disciplina->DisciplinaID}}/{{$matriculaID}}" target="_blank">https://sigma.noava.com.br/iesde/public/pdf/{{$disciplina->DisciplinaID}}/{{$matriculaID}}</a></h6>
+                        <h6>URL de PDF: <a href="https://sigma.noava.com.br/iesde/public/pdf/{{$disciplina->DisciplinaID}}/{{$matriculaID}}" target="_blank">https://sigma.noava.com.br/iesde/public/pdf/{{$disciplina->DisciplinaID}}/{{$matriculaID}}</a></h6><br>
                         <a href="{{route( 'formattingAlternatives' , $disciplina->DisciplinaID)}}"><button class="btn btn-primary btn-sm" style="margin-bottom: 30px;">Banco de Questões</button></a><hr>
                         <h6>Disciplina ID: {{$disciplina->DisciplinaID}}</h6>
                         <h6>Curso ID: {{$disciplina->CursoID}}</h6>
