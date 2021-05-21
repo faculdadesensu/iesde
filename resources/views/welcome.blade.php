@@ -91,14 +91,14 @@
                         <h6>Nome Disciplina: {{$disciplina->computed}}</h6><hr>
                         <b>Ementa:</b> {{$disciplina->Ementa}}<br><br><hr>
                         <b>Plano Aula:</b> {!!str_replace( ["?", "<br>"], ["", ""], $disciplina->PlanoAula)!!}<hr>
+                        <a href="{{route( 'formattingAlternatives' , $disciplina->DisciplinaID)}}"><button class="btn btn-primary btn-sm" style="margin-bottom: 30px;">Banco de Questões</button></a>
                         <h6><b>Aulas:</b></h6>
                         @foreach($aulas as $aula)
                             @foreach($aula as $value)
                                 @if (isset($value->DisciplinaID))
                                     @if($value->DisciplinaID == $disciplina->DisciplinaID)
                                         <p><b>Nome Aula: </b>{{$value->Tema}}</p>
-                                        <h6>URL do video: <a href="https://sigma.noava.com.br/iesde/public/video/{{$value->AulaID}}/{{$value->MatriculaID}}" target="_blank">https://sigma.noava.com.br/iesde/public/video/{{$value->AulaID}}/{{$value->MatriculaID}}</a></h6>
-                                        <a href="{{route( 'formattingAlternatives' , $value->DisciplinaID)}}"><button class="btn btn-primary btn-sm" style="margin-bottom: 30px;">Banco de Questões</button></a>
+                                        <h6>URL do video: <a href="https://sigma.noava.com.br/iesde/public/video/{{$value->AulaID}}/{{$value->MatriculaID}}" target="_blank">https://sigma.noava.com.br/iesde/public/video/{{$value->AulaID}}/{{$value->MatriculaID}}</a></h6><br><br>
                                     @endif                      
                                 @endif
                             @endforeach
