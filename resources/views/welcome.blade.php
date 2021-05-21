@@ -60,19 +60,19 @@
                 <hr>
                 <h4>CONSULTA DE CONTEUDO DOS DISCIPLINAS</h4>
                 <div class="row ">
-                    <div class="col-5">
+                    <div class="col-sm-4">
                         <form action="{{route('pdf.links')}}" method="post">
                             @csrf
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">DIGITE A MATRICULA</span>
+                                <span class="input-group-text" id="basic-addon1">MATRICULA</span>
                                 <input type="number" class="form-control" name="matriculaID" required>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">DIGITE O ID DO CURSO</span>
+                                <span class="input-group-text" id="basic-addon1">ID DO CURSO</span>
                                 <input name="cursoID" type="number" class="form-control" required>
                             </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" type="number">DIGITE O CÓDIGO DA DISCIPLINA</span>
+                            <div class="input-group  mb-3">
+                                <span class="input-group-text" type="number">CÓDIGO DA DISCIPLINA</span>
                                 <input  name="disciplinaID" type="number" class="form-control" required>
                             </div>
                             <p align="right">
