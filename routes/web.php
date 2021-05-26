@@ -27,6 +27,6 @@ Route::get('/disciplinas', [ServiceController::class, 'getDisciplinas'])->name('
 Route::get('/disciplinas/all', [ServiceController::class, 'getAllDisciplinas'])->name('getDisciplinas');
 Route::get('/pdf/{idcurso}/{matricula}', [ServiceController::class, 'pdf'])->name('pdf');
 Route::post('/pdf/links', [ServiceController::class, 'pdfLinks'])->name('pdf.links');
-Route::get('/video/{idcurso}/{matricula}', [ServiceController::class, 'video'])->name('video');
+Route::get('/video/{idAula}/{matricula}', [ServiceController::class, 'video'])->name('video');
 Route::get('/aulas/{idcurso}/{matricula}', [ServiceController::class, 'aulasVideo'])->name('aulasVideo');
 Route::get('/questoes/{disciplinaID}', [ServiceController::class, 'getBancoQuestoesDisciplinas'])->name('getBancoQuestoesDisciplinas');
