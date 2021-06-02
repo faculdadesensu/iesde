@@ -85,7 +85,7 @@
                 @if (@$disciplinas)
                     <h4>Resumo de Disciplinas</h4>
                     @foreach($disciplinas as $disciplina)
-                        <h6>URL de PDF: <a href="https://sigma.noava.com.br/iesde/public/pdf/{{$disciplina->DisciplinaID}}/{{$matriculaID}}" target="_blank">https://sigma.noava.com.br/iesde/public/pdf/{{$disciplina->DisciplinaID}}/{{$matriculaID}}</a></h6><br>
+                        <h6>URL de PDF: <a href="https://avamoca.com.br/iesde/public/pdf/{{$disciplina->DisciplinaID}}/{{$matriculaID}}" target="_blank">https://avamoca.com.br/iesde/public/pdf/{{$disciplina->DisciplinaID}}/{{$matriculaID}}</a></h6><br>
                         <a href="{{route( 'formattingAlternatives' , $disciplina->DisciplinaID)}}" target="_blank"><button class="btn btn-primary btn-sm" style="margin-bottom: 30px;">Banco de Questões</button></a><hr>
                         <h6>Disciplina ID: {{$disciplina->DisciplinaID}}</h6>
                         <h6>Curso ID: {{$disciplina->CursoID}}</h6>
@@ -99,7 +99,7 @@
                                 @if (isset($value->DisciplinaID))
                                     @if($value->DisciplinaID == $disciplina->DisciplinaID)
                                         <p><b>Nome Aula: </b>{{$value->Tema}}</p>
-                                        <h6>URL do video: <a href="https://sigma.noava.com.br/iesde/public/video/{{$value->AulaID}}/{{$value->MatriculaID}}" target="_blank">https://sigma.noava.com.br/iesde/public/video/{{$value->AulaID}}/{{$value->MatriculaID}}</a></h6><br><br>
+                                        <h6>URL do video: <a href="https://avamoca.com.br/iesde/public/video/{{$value->AulaID}}/{{$value->MatriculaID}}" target="_blank">https://avamoca.com.br/iesde/public/video/{{$value->AulaID}}/{{$value->MatriculaID}}</a></h6><br><br>
                                     @endif                      
                                 @endif
                             @endforeach
