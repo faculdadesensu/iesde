@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 class ServiceController extends Controller
 {
 
-    private $api_server = 'http://ead.portalava.com.br/web_service';
+    private $api_server = 'https://ead.portalava.com.br/web_service';
     private $api_http_user = '1590e99c63d124e374345de71205ddb7c63a0b8d';
     private $api_http_pass = 'afb94979f63f3038b84344d7ac37febe39748167';
 
@@ -49,7 +49,6 @@ class ServiceController extends Controller
         $response = json_decode($output);
 
         return $response; // Resposta do WebService
-
         
     }
 
